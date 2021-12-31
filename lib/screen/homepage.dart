@@ -12,10 +12,19 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
     int counter =0;
     int totalClick=0;
+
+    void counterReset(){
+      setState(() {
+        counter = 0;
+        totalClick =0;
+      });
+    }
+
     void increment  () {
       setState(() {
         totalClick++;
         counter++;
+
       });
     }
     void decrement (){
@@ -46,7 +55,9 @@ class _HomePageState extends State<HomePage> {
                       Padding(
                         padding:  EdgeInsets.symmetric(horizontal: 20),
                         child: Text(counter.toString(),
-                          style: TextStyle(fontSize: 28),),
+                          style: TextStyle(color:
+                          counter==0?Colors.black:counter>0?Colors.green:Colors.red,
+                               fontSize: 28),),
                       ),
                       RoundIconButton(icon:Icons.add, onPress:increment,
                         btnTextColor: Colors.white,btnColor: Colors.blueAccent,),
@@ -58,8 +69,27 @@ class _HomePageState extends State<HomePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
+                  Visibility(
+                    visible: counter<0?true:false,
+                      child: Text("Set to Positive",style: kTextStyle,),
+                  ),
+                  ElevatedButton(
+                      onPressed:counter>=0?null
+                          :(){
+                        counterReset();
+                        print("click");
+                      },
+                      child: Text("0 Plus"))
+                ],
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
                   Text("Total",style: kTextStyle),
-                  Text("Reset",style: kTextStyle),
+                  GestureDetector(
+                    // onTap: counter < 0 ? null : counterReset,
+                      child: Text("Reset",style: kTextStyle),
+                  ),
                   Text(
                     totalClick.toString(),
                     style: kTextStyle,
