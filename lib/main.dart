@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:providerbasis/provider/home_provider.dart';
 import 'package:providerbasis/provider/item_provider.dart';
 import 'package:providerbasis/screen/homepage.dart';
 import 'package:providerbasis/screen/provider.dart';
@@ -23,8 +24,9 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: ChangeNotifierProvider.value(
-        value: ItemsProvider(),
-        child:  MyHomePageProvider(),
+        value: HomePageProvider(),
+
+        child:  HomePage(),
       ),
       // home: const HomePage(),
     );

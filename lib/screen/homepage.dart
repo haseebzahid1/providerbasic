@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:providerbasis/provider/home_provider.dart';
 import '../style/constent.dart';
 import '../widget/rounded_icon_button.dart';
 
@@ -10,32 +12,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-
-    int counter =0;
-    int totalClick=0;
-
-    void counterReset(){
-      setState(() {
-        counter = 0;
-        totalClick =0;
-      });
-    }
-
-    void increment  () {
-      setState(() {
-        totalClick++;
-        counter++;
-
-      });
-    }
-    void decrement (){
-      setState(() {
-       totalClick++;
-       counter--;
-      });
-    }
   @override
   Widget build(BuildContext context) {
+   final provider = Provider.of<HomePageProvider>(context);
+      print(provider);
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -50,17 +30,17 @@ class _HomePageState extends State<HomePage> {
                   Text("Ram",style: TextStyle(fontSize: 28),),
                   Row(
                     children: [
-                      RoundIconButton(icon: Icons.remove, onPress: decrement,
+                      RoundIconButton(icon: Icons.remove, onPress: provider.decrement,
                         btnTextColor: Colors.white,btnColor: Colors.blueAccent,
                       ),
                       Padding(
                         padding:  EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(counter.toString(),
+                        child: Text(provider.counter.toString(),
                           style: TextStyle(color:
-                          counter==0?Colors.black:counter>0?Colors.green:Colors.red,
+                          provider.counter==0?Colors.black:provider.counter>0?Colors.green:Colors.red,
                                fontSize: 28),),
                       ),
-                      RoundIconButton(icon:Icons.add, onPress:increment,
+                      RoundIconButton(icon:Icons.add, onPress:provider.increment,
                         btnTextColor: Colors.white,btnColor: Colors.blueAccent,),
                     ],
                   ),
@@ -71,13 +51,13 @@ class _HomePageState extends State<HomePage> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Visibility(
-                    visible: counter<0?true:false,
+                    visible: provider.counter<0?true:false,
                       child: Text("Set to Positive",style: kTextStyle,),
                   ),
                   ElevatedButton(
-                      onPressed:counter>=0?null
+                      onPressed:provider.counter>=0?null
                           :(){
-                        counterReset();
+                        provider.counterReset();
                         print("click");
                       },
                       child: Text("0 Plus"))
@@ -88,12 +68,12 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Text("Total",style: kTextStyle),
                   GestureDetector(
-                    onTap: counterReset,
+                    onTap: provider.counterReset,
                     // onTap: counter < 0 ? null : counterReset,
                       child: Text("Reset",style: kTextStyle),
                   ),
                   Text(
-                    totalClick.toString(), style: kTextStyle,
+                    provider.totalClick.toString(), style: kTextStyle,
                   ),
                 ],
               ),
@@ -102,6 +82,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
+
   }
 }
 
