@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:providerbasis/provider/item_provider.dart';
 import 'package:providerbasis/screen/homepage.dart';
+import 'package:providerbasis/screen/provider.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +22,11 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: ChangeNotifierProvider.value(
+        value: ItemsProvider(),
+        child:  MyHomePageProvider(),
+      ),
+      // home: const HomePage(),
     );
   }
 }

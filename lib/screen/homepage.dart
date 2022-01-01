@@ -10,6 +10,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
     int counter =0;
     int totalClick=0;
 
@@ -87,12 +88,12 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Text("Total",style: kTextStyle),
                   GestureDetector(
+                    onTap: counterReset,
                     // onTap: counter < 0 ? null : counterReset,
                       child: Text("Reset",style: kTextStyle),
                   ),
                   Text(
-                    totalClick.toString(),
-                    style: kTextStyle,
+                    totalClick.toString(), style: kTextStyle,
                   ),
                 ],
               ),
