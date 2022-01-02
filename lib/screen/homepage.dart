@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:providerbasis/provider/home_provider.dart';
+import 'package:providerbasis/screen/product/product_mainscreen.dart';
 import '../style/constent.dart';
 import '../widget/rounded_icon_button.dart';
 
@@ -24,27 +25,55 @@ class _HomePageState extends State<HomePage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
                 children: [
-                  Text("Ram",style: TextStyle(fontSize: 28),),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      RoundIconButton(icon: Icons.remove, onPress: provider.decrement,
-                        btnTextColor: Colors.white,btnColor: Colors.blueAccent,
+                      Text("Ram",style: TextStyle(fontSize: 28),),
+                      Row(
+                        children: [
+                          RoundIconButton(icon: Icons.remove, onPress: provider.decrement,
+                            btnTextColor: Colors.white,btnColor: Colors.blueAccent,
+                          ),
+                          Padding(
+                            padding:  EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(provider.counter.toString(),
+                              style: TextStyle(color:
+                              provider.counter==0?Colors.black:provider.counter>0?Colors.green:Colors.red,
+                                  fontSize: 28),),
+                          ),
+                          RoundIconButton(icon:Icons.add, onPress:provider.increment,
+                            btnTextColor: Colors.white,btnColor: Colors.blueAccent,),
+                        ],
                       ),
-                      Padding(
-                        padding:  EdgeInsets.symmetric(horizontal: 20),
-                        child: Text(provider.counter.toString(),
-                          style: TextStyle(color:
-                          provider.counter==0?Colors.black:provider.counter>0?Colors.green:Colors.red,
-                               fontSize: 28),),
-                      ),
-                      RoundIconButton(icon:Icons.add, onPress:provider.increment,
-                        btnTextColor: Colors.white,btnColor: Colors.blueAccent,),
+
                     ],
                   ),
+                  SizedBox(height: 30,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Hard",style: TextStyle(fontSize: 28),),
+                      Row(
+                        children: [
+                          RoundIconButton(icon: Icons.remove, onPress: provider.subdecrement,
+                            btnTextColor: Colors.white,btnColor: Colors.blueAccent,
+                          ),
+                          Padding(
+                            padding:  EdgeInsets.symmetric(horizontal: 20),
+                            child: Text(provider.subcounter.toString(),
+                              style: TextStyle(color:
+                              provider.subcounter==0?Colors.black:provider.subcounter>0?Colors.green:Colors.red,
+                                  fontSize: 28),),
+                          ),
+                          RoundIconButton(icon:Icons.add, onPress:provider.subincrement,
+                            btnTextColor: Colors.white,btnColor: Colors.blueAccent,),
+                        ],
+                      ),
 
+                    ],
+                  ),
                 ],
               ),
               Row(
@@ -63,20 +92,44 @@ class _HomePageState extends State<HomePage> {
                       child: Text("0 Plus"))
                 ],
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              Column(
                 children: [
-                  Text("Total",style: kTextStyle),
-                  GestureDetector(
-                    onTap: provider.counterReset,
-                    // onTap: counter < 0 ? null : counterReset,
-                      child: Text("Reset",style: kTextStyle),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("Total",style: kTextStyle),
+                      GestureDetector(
+                        onTap: provider.counterReset,
+                        // onTap: counter < 0 ? null : counterReset,
+                        child: Text("Reset",style: kTextStyle),
+                      ),
+                      Text(
+                        provider.totalClick.toString(), style: kTextStyle,
+                      ),
+                    ],
                   ),
-                  Text(
-                    provider.totalClick.toString(), style: kTextStyle,
+                  SizedBox(height: 30,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text("SubTotal",style: kTextStyle),
+                      // GestureDetector(
+                      //   onTap: (){},
+                      //   // onTap: counter < 0 ? null : counterReset,
+                      //   child: Text("Reset",style: kTextStyle),
+                      // ),
+                      Text("${provider.counter+provider.subcounter}", style: kTextStyle,
+                      ),
+                    ],
                   ),
+                  ElevatedButton(
+                      onPressed: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductMainScreen()));
+                      },
+                      child: Text("product"),
+                  )
                 ],
-              ),
+              )
             ],
           ),
         ),
