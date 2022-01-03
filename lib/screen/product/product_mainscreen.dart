@@ -11,7 +11,12 @@ class ProductMainScreen extends StatelessWidget {
       // extendBodyBehindAppBar: true,
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        leading: Icon(Icons.arrow_back,color: Colors.black,),
+        leading: GestureDetector(
+          onTap: (){
+            Navigator.of(context).pop();
+          },
+            child: Icon(Icons.arrow_back,color: Colors.black,)
+        ),
         actions: [
           Icon(Icons.add_shopping_cart,color: Colors.black,),
           SizedBox(width: 10,),

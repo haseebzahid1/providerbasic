@@ -7,6 +7,8 @@ class HomePageProvider extends ChangeNotifier{
   int total = 0;
   int subcounter =0;
 
+
+
   void counterReset(){
       counter = 0;
       totalClick =0;
@@ -44,4 +46,5 @@ class HomePageProvider extends ChangeNotifier{
     subTotal();
     notifyListeners();
   }
+
 }

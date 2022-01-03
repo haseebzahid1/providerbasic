@@ -11,7 +11,7 @@ class ProductBody extends StatelessWidget {
     final Size size = MediaQuery.of(context).size;
     return SafeArea(
         child: Container(
-          padding: EdgeInsets.symmetric(horizontal: 20,vertical: 20),
+          padding: EdgeInsets.symmetric(horizontal: 10,vertical: 20),
           width:size.width,
           color: Colors.white,
       child: Column(
@@ -23,8 +23,8 @@ class ProductBody extends StatelessWidget {
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 20,
-                    crossAxisSpacing: 20,
-                    childAspectRatio: 0.85
+                    crossAxisSpacing: 10,
+                    childAspectRatio: 1.45,
                   ),
                   itemBuilder: (context, index){
                     Product productItem = productList[index];

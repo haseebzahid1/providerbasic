@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:providerbasis/provider/home_provider.dart';
+import 'package:providerbasis/screen/listview/component/listview_body.dart';
 import 'package:providerbasis/screen/product/product_mainscreen.dart';
 import '../style/constent.dart';
 import '../widget/rounded_icon_button.dart';
+import 'listview/listview_screen.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -120,14 +122,29 @@ class _HomePageState extends State<HomePage> {
                       // ),
                       Text("${provider.counter+provider.subcounter}", style: kTextStyle,
                       ),
+
                     ],
                   ),
-                  ElevatedButton(
+                SizedBox(height: 30,),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+
+                    ElevatedButton(
                       onPressed: (){
                         Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductMainScreen()));
                       },
-                      child: Text("product"),
-                  )
+                      child: Text("GridView"),
+                    ),
+                    SizedBox(width: 30,),
+                    ElevatedButton(
+                      onPressed: (){
+                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ListViewScreen()));
+                      },
+                      child: Text("ListView",),
+                    )
+                  ],
+                ),
                 ],
               )
             ],
