@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:providerbasis/provider/home_provider.dart';
+import 'package:providerbasis/screen/form/form_screen.dart';
 import 'package:providerbasis/screen/listview/component/listview_body.dart';
 import 'package:providerbasis/screen/product/product_mainscreen.dart';
 import '../style/constent.dart';
@@ -17,8 +18,21 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
+    return  ChangeNotifierProvider<HomePageProvider>(
+        create: (BuildContext context)=>HomePageProvider(),
+      child:HomePageWidget(),
+    );
+
+  }
+}
+
+
+class HomePageWidget extends StatelessWidget {
+  const HomePageWidget({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
    final provider = Provider.of<HomePageProvider>(context);
-      print(provider);
     return Scaffold(
       body: SafeArea(
         child: Container(
@@ -83,7 +97,7 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   Visibility(
                     visible: provider.counter<0?true:false,
-                      child: Text("Set to Positive",style: kTextStyle,),
+                    child: Text("Set to Positive",style: kTextStyle,),
                   ),
                   ElevatedButton(
                       onPressed:provider.counter>=0?null
@@ -125,26 +139,26 @@ class _HomePageState extends State<HomePage> {
 
                     ],
                   ),
-                SizedBox(height: 30,),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
+                  SizedBox(height: 30,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
 
-                    ElevatedButton(
-                      onPressed: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductMainScreen()));
-                      },
-                      child: Text("GridView"),
-                    ),
-                    SizedBox(width: 30,),
-                    ElevatedButton(
-                      onPressed: (){
-                        Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ListViewScreen()));
-                      },
-                      child: Text("ListView",),
-                    )
-                  ],
-                ),
+                      ElevatedButton(
+                        onPressed: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>ProductMainScreen()));
+                        },
+                        child: Text("GridView"),
+                      ),
+                      SizedBox(width: 30,),
+                      ElevatedButton(
+                        onPressed: (){
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FormScreen()));
+                        },
+                        child: Text("Login",),
+                      )
+                    ],
+                  ),
                 ],
               )
             ],
@@ -152,7 +166,5 @@ class _HomePageState extends State<HomePage> {
         ),
       ),
     );
-
   }
 }
-
