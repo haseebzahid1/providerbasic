@@ -3,14 +3,28 @@ import 'package:provider/provider.dart';
 import 'package:providerbasis/screen/form/provider/form_provider.dart';
 import 'package:providerbasis/screen/form/widget/InputFieldSuffixIcon.dart';
 import 'package:providerbasis/screen/form/widget/inputfield_widget.dart';
+import '../listview/listview_screen.dart';
 import 'component/form_body.dart';
 
 class FormScreen extends StatelessWidget {
-   FormScreen({Key? key}) : super(key: key);
+ FormScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider<FormProvider>(
+        create: (_) => FormProvider(),
+        child: DDD(),
+    );
+  }
+}
+
+
+class DDD extends StatelessWidget {
+
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
-    final formProvider = Provider.of<FormProvider>(context);
+  final formProvider = Provider.of<FormProvider>(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -85,6 +99,7 @@ class FormScreen extends StatelessWidget {
                             ScaffoldMessenger.of(context).showSnackBar(
                                 const SnackBar(content: Text('VALIDATION ERROR')));
                           }
+                          Navigator.of(context).push(MaterialPageRoute(builder: (context) => ListViewScreen(),));
                         },
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),

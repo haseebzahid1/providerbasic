@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
-
-import '../../../modal/product.dart';
+import 'package:providerbasis/modal/product.dart';
 
 
 class ProductBody extends StatelessWidget {
-  const ProductBody({Key? key}) : super(key: key);
+   ProductBody({Key? key}) : super(key: key);
+  List<Product> productList = [
+    Product(
+      title: "Flash Deal",
+      iamge: "assets/images/Image Banner 2.png",
+    ),Product(
+      title: "Bill",
+      iamge: "assets/images/Image Banner 3.png",
+    ),Product(
+      title: "Game",
+      iamge: "assets/images/ladies_bags.jpg",
+    ),Product(
+      title: "Daily Gift",
+      iamge: "assets/images/boy_showes.jpg",
+    ),Product(
+      title: "More",
+      iamge: "assets/images/ladies_ring.jpg",
+    ),Product(
+      title: "More",
+      iamge: "assets/images/ladies_ring2.jpg",
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +40,7 @@ class ProductBody extends StatelessWidget {
               child:GridView.builder(
                 physics: BouncingScrollPhysics(),
                 itemCount: productList.length,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 20,
                     crossAxisSpacing: 10,
@@ -42,7 +62,7 @@ class ProductBody extends StatelessWidget {
                             ClipRRect(
                               borderRadius: BorderRadius.circular(20),
                                 child: Image.asset(
-                                  productItem.iamge,width: size.width,height: size.height,fit: BoxFit.cover,)
+                                  "${productItem.iamge}",width: size.width,height: size.height,fit: BoxFit.cover,)
                             ),
                             Container(
                               decoration: BoxDecoration(
@@ -67,7 +87,7 @@ class ProductBody extends StatelessWidget {
                                   decoration: BoxDecoration(
                                     color: Colors.deepPurple
                                   ),
-                                  child: Text(productItem.title,style: TextStyle(fontSize: 18,color: Colors.white),),
+                                  child: Text("${productItem.title}",style: TextStyle(fontSize: 18,color: Colors.white),),
                                 ),
                               ),
                             ),
